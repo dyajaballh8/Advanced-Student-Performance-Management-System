@@ -22,7 +22,7 @@ public class database {
             
             Class.forName("com.mysql.jdbc.Driver");
             
-            Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/employee", "root", "");
+            Connection connect = DriverManager.getConnection("jdbc:sql://localhost/employee", "root", "");
             return connect;
         }catch(Exception e){e.printStackTrace();}
         return null;
