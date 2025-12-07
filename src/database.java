@@ -22,8 +22,8 @@ public class database {
             
             Class.forName("com.mysql.jdbc.Driver");
             
-            Connection connect = DriverManager.getConnection("jdbc:sql://localhost/employee", "root", "");
-            return connect;
+            Connection connect = DriverManager.getConnection("jdbc:sql://DYAAGABULLAH\DYAA;Database=StudentPerformanceDB;IntegratedSecurity=true");
+            return connect;Inte
         }catch(Exception e){e.printStackTrace();}
         return null;
     }
