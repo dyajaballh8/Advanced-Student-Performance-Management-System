@@ -1,1 +1,168 @@
+package ada.projectfinal;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class ProjectFinal {
+
+    static Scanner sc = new Scanner(System.in);
+    static int hours;
+    static int C;
+    static int attendedDays;
+   
+    public static void main(String[] args) {
+
+        ArrayList<Student> students = new ArrayList<>();
+        ArrayList<AlertManager> alerts = new ArrayList<>();
+        
+        System.out.println("=== University System Demo ===");
+
+            System.out.println("Enter Your ID:");
+            int sid = getInt();
+
+            System.out.println("Enter Your Name:");
+            String name = getString();
+
+            System.out.println("Enter Your Password:");
+            String pass = getString();
+            
+            System.out.println("Enter Your attendedDays :");
+            attendedDays = getIntInRange(0,70);
+            
+            System.out.println("Enter Your Major:");
+            String major = getString();
+
+            System.out.println("Enter Your Score :");
+             double score = getDoubleInRange(0, 1000);
+
+            System.out.println("Enter Your Total Hours:");
+             hours = getIntInRange(1, 21);
+
+            System.out.println("Enter Your Faculty:");
+            String faculty = getString();
+
+            System.out.println("Enter Your Courses Count:");
+             C = getIntInRange(1, 10);
+
+            System.out.println("Enter Your Enrollments Count:");
+            int E = getIntInRange(1, 10);
+
+            students.add(new Student(sid, name, pass, major, score, hours, E, C, faculty));
+            alerts.add(new AlertManager(name,80));
+      
+            System.out.println("\n=== Login ===");
+        System.out.println("Enter Your Student Name :");
+        String loginName = getString();
+
+        System.out.println("Enter Your Password:");
+        String loginPass = getString();
+
+        Student currentStudent = null;
+
+        for (Student s : students) {
+            if (s.getName().equals(loginName) && s.getPassword().equals(loginPass)) {
+                currentStudent = s;
+                break;
+            }
+        }
+
+        if (currentStudent == null) {
+            System.out.println("Login Failed!");
+            return;
+        }
+        AlertManager currentAlert=null;
+        
+        for (AlertManager al : alerts) {
+    if (al.getStudentName().equals(currentStudent.getName())) {
+        currentAlert = al;
+        break;
+      }
+   }
+        if (currentAlert == null) {
+    System.out.println("No attendance data found.");
+    return;
+      }
+        
+        System.out.println("Login Successful! Welcome " + currentStudent.getName());
+
+        while (true) {
+            System.out.println("\nChoose Your Operation:");
+            System.out.println("1. Calculate GPA");
+            System.out.println("2. View Absence Days");
+            System.out.println("3. View Alerts");
+            System.out.println("4. View Attendance percentange");
+            System.out.println("5. View Attendance Report");
+            System.out.println("6 Display Info");
+            System.out.println("0.Exit");
+            int choice = getIntInRange(0, 6);
+
+            switch (choice) {
+
+                case 1:
+                    currentStudent.CalculateMygpa(C, hours);
+                    break;
+                    
+                case 2:
+                    System.out.println(currentAlert.getAbsentDays(attendedDays));
+                    break;
+
+                case 3:
+                    System.out.println(currentAlert.AttendanceAlert(attendedDays));
+                    break;
+
+                case 4:
+                    System.out.println(currentAlert.getAttendancePercentage(attendedDays));
+                    break;
+                    
+                case 5:
+                    System.out.println(currentAlert.getAttendanceReport(attendedDays));
+                    break;
+
+                case 6:
+                    currentStudent.DisplayInfo();
+                    break;
+
+                case 0:
+                    System.out.println("Goodbye!");
+                    return;                
+            }
+        }
+    }
+    public static int getInt() {
+        while (true) {
+            try {
+                System.out.print("");
+                return Integer.parseInt(sc.nextLine());
+            } catch (Exception e) {
+                System.out.println("Enter a valid number.");
+            }
+        }
+    }
+    public static int getIntInRange(int min, int max) {
+        while (true) {
+            int val = getInt();
+            if (val >= min && val <= max) return val;
+            System.out.println("Value must be between " + min + " and " + max);
+        }
+    }
+    public static double getDoubleInRange(double min, double max) {
+        while (true) {
+            try {
+                System.out.print("");
+                double val = Double.parseDouble(sc.nextLine());
+                if (val >= min && val <= max) return val;
+                System.out.println("Value must be between " + min + " and " + max);
+            } catch (Exception e) {
+                System.out.println("Enter a valid number.");
+            }
+        }
+    }
+    public static String getString() {
+        while (true) {
+            System.out.print("");
+            String s = sc.nextLine().trim();
+            if (!s.isEmpty()) return s;
+            System.out.println("Cannot be empty.");
+            }
+          }
+        }
