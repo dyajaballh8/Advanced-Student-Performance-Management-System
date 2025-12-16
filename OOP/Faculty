@@ -1,1 +1,91 @@
+package ada.projectfinal;
+import java.util.Scanner;
+
+public class Faculty extends User  {
+    Scanner s =new Scanner(System.in);
+    private int facutyId;
+    private String name;
+    private String departement;
+
+    public Faculty() {
+    }
+
+    public Faculty(int facutyId, String name, String departement) {
+        this.facutyId = facutyId;
+        this.name = name;
+        this.departement = departement;
+    }
+    
+
+    public Faculty(int facutyId, String name, String departement, int userID, String username, String password, String role) {
+        super(userID, username, password, role);
+        this.facutyId = userID;
+        this.name =username;
+        this.departement = departement;
+        this.password=password;
+        
+    }
+
+    public void setFacutyId(int facutyId) {
+        this.facutyId = facutyId;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDepartement(String departement) {
+        this.departement = departement;
+    }
+
+    public int getFacutyId() {
+        return facutyId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDepartement() {
+        return departement;
+    }
+    public void enterGRade(int StudentId,int courseID,double score){
+        System.out.println("Faculty Name : " + name +"Enter Grade : " + score +"For Student : " + StudentId + "In Course : " + courseID);
+       
+    }
+    public void setAssessment(int courseID,String date,String type){
+        System.out.println("Setting Assessment alert For course : " + courseID + "Type : " + type +"Date : "+ date);
+    }
+    public void ViewStudentPerformance(int StudentId){
+        System.out.println("Viewing Performance For Student : " + StudentId);
+        
+    }
+    
+    @Override
+    public void Login(String password,String name){
+        this.password=password;
+        this.name=name;
+        System.out.println("Enter Your Password");
+        password = s.next();
+        System.out.println("Enter Your name");
+        name = s.next();
+        if(password==password && name==name){
+            System.out.println("You Successfully Login");
+        }
+        else{
+        System.out.println("Error , Enter Your Information Correctly");
+        return;
+         }    
+    }
+    @Override
+        public void Logout(){
+            System.out.println("You Successfully Logout");
+        }
+    @Override
+    public void DisplayInfo(){
+        System.out.println("College Name : " + name  +"College_ID : " + facutyId + "Departement : " +departement);
+    }
+    
+    
+}
 
