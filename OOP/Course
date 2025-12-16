@@ -1,1 +1,75 @@
+package ada.projectfinal;
+import java.util.List;
+import java.util.ArrayList;
 
+
+public class Course {
+    private int courseID;
+    private int creditHours;
+    private int TotalScore;
+    private String code;
+    private String name;
+    private List<Faculty> facultyMembers;
+    private List<Enrollment> enrollments;
+
+    public Course() {
+    }
+
+    public Course(int courseID, int creditHours, String name) {
+        this.courseID = courseID;
+        this.creditHours = creditHours;
+        this.name = name;
+    }
+    
+    
+    public Course(int courseID, int creditHours, String code, String name, List<Faculty> facultyMembers, List<Enrollment> enrollments) {
+        this.courseID = courseID;
+        this.creditHours = creditHours;
+        this.code = code;
+        this.name = name;
+        this.facultyMembers = new ArrayList<>();
+        this.enrollments = new ArrayList<>();
+    }
+
+    public void setCourseID(int courseID) {
+        this.courseID = courseID;
+    }
+
+    public void setCreditHours(int creditHours) {
+        this.creditHours = creditHours;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setFacultyMembers(List<Faculty> facultyMembers) {
+        this.facultyMembers = facultyMembers;
+    }
+
+    public void setEnrollments(List<Enrollment> enrollments) {
+        this.enrollments = enrollments;
+    }
+
+    public int getCreditHours() {
+        return creditHours;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public String getName() {
+        return name;
+    }
+    public void addFaculty(Faculty faculty){
+        this.facultyMembers.add(faculty);
+    }
+    public void addEnrollment(Enrollment enrollments){
+        this.enrollments.add(enrollments);
+    } 
+   } 
