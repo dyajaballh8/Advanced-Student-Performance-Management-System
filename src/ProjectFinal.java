@@ -13,20 +13,14 @@ public class ProjectFinal {
         AttendanceDAO attendanceDAO = new AttendanceDAO();
         EnrollmentDAO enrollmentDAO = new EnrollmentDAO();
 
-        System.out.print("Enter Name: ");
+        System.out.print("Enter Username: ");
         String name = sc.nextLine();
 
         System.out.print("Enter Password: ");
         String pass = sc.nextLine();
 
-        Student current = null;
-
-        for (Student s : studentDAO.getAllStudents()) {
-            if (s.getName().equals(name) && s.getPassword().equals(pass)) {
-                current = s;
-                break;
-            }
-        }
+        // ✅ WHERE instead of FOR
+        Student current = studentDAO.login(name, pass);
 
         if (current == null) {
             System.out.println("Login Failed");
@@ -36,7 +30,9 @@ public class ProjectFinal {
         System.out.println("Login Successful");
         current.DisplayInfo();
 
-        int attended = attendanceDAO.getAttendedDays(current.getStudentId());
+        int attendedDays =
+                attendanceDAO.getAttendedDays(current.getStudentId());
+
         AlertManager alert = new AlertManager();
 
         List<Enrollment> enrollments =
@@ -44,7 +40,7 @@ public class ProjectFinal {
 
         current.calculateGPAFromDB(enrollments);
 
-        System.out.println("Attendance %: " +
-                alert.getAttendancePercentage(attended));
+        System.out.println("Attendance Percentage: " +
+                alert.getAttendancePercentage(attendedDays));
     }
 }
