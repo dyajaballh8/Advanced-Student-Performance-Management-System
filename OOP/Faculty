@@ -5,23 +5,29 @@ public class Faculty extends User  {
     Scanner s =new Scanner(System.in);
     private int facutyId;
     private String name;
-    private String departement;
+    private int section;
+    private double score; 
+    private double gpa;
 
+    public Faculty(int facutyId,String password) {
+        super(password);
+        this.facutyId = facutyId;
+    }
     public Faculty() {
     }
 
-    public Faculty(int facutyId, String name, String departement) {
+    public Faculty(int facutyId, String name, int section) {
         this.facutyId = facutyId;
         this.name = name;
-        this.departement = departement;
+        this.section = section;
+        
     }
     
-
-    public Faculty(int facutyId, String name, String departement, int userID, String username, String password, String role) {
+    public Faculty(int facutyId, String name, int section, int userID, String username, String password, String role) {
         super(userID, username, password, role);
         this.facutyId = userID;
         this.name =username;
-        this.departement = departement;
+        this.section = section;
         this.password=password;
         
     }
@@ -34,10 +40,15 @@ public class Faculty extends User  {
         this.name = name;
     }
 
-    public void setDepartement(String departement) {
-        this.departement = departement;
+    public void setSection(int section) {
+        this.section = section;
     }
 
+    public void setFacultyPassword(String password) {
+        this.password = password;
+    }
+
+    
     public int getFacutyId() {
         return facutyId;
     }
@@ -46,9 +57,19 @@ public class Faculty extends User  {
         return name;
     }
 
-    public String getDepartement() {
-        return departement;
+    public int getSection() {
+        return section;
     }
+
+    public String getFacultyPassword() {
+        return password;
+    }
+
+    public int getFacultyID() {
+        return facutyId;
+    }
+    
+    
     public void enterGRade(int StudentId,int courseID,double score){
         System.out.println("Faculty Name : " + name +"Enter Grade : " + score +"For Student : " + StudentId + "In Course : " + courseID);
        
@@ -60,16 +81,33 @@ public class Faculty extends User  {
         System.out.println("Viewing Performance For Student : " + StudentId);
         
     }
+    public double Calculategpa(double score,  int hours )
+    {
+        double totalPoints = 0;
+        int totalHours = 0;
+            totalPoints += score * hours;
+            totalHours += hours;
+        
+        double GPA = ((totalPoints / totalHours/100.0)*4.0);
+         this.gpa=GPA ;
+        return GPA;
+    }
+    public void setGpa(double GPA) {
+        this.gpa = GPA;
+    }
+    public double getGpa() {
+        return gpa;
+    }
     
     @Override
-    public void Login(String password,String name){
+    public void Login(int facutyId ,String password){
         this.password=password;
-        this.name=name;
+        this.facutyId=facutyId;
         System.out.println("Enter Your Password");
         password = s.next();
         System.out.println("Enter Your name");
         name = s.next();
-        if(password==password && name==name){
+        if(password==password && facutyId==facutyId){
             System.out.println("You Successfully Login");
         }
         else{
@@ -83,9 +121,7 @@ public class Faculty extends User  {
         }
     @Override
     public void DisplayInfo(){
-        System.out.println("College Name : " + name  +"College_ID : " + facutyId + "Departement : " +departement);
+        System.out.println("College Name : " + name  +"College_ID : " + facutyId + "\nsection : " +section);
     }
-    
-    
 }
 
