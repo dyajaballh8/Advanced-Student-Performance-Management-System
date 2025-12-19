@@ -3,13 +3,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AlertManager {
-    private String studentName;
+    private int studentId;
     private int totalDays=80;
     private int attendedDays;
     private List<String> alerts=new ArrayList<>();
 
-    public AlertManager(String studentName, int totalDays) {
-        this.studentName = studentName;
+    public AlertManager(int studentId, int totalDays) {
+        this.studentId = studentId;
         this.totalDays = 70;
         this.attendedDays = 0;
     }
@@ -51,7 +51,7 @@ public class AlertManager {
         return report;
     }
 
-    public String getStudentName() {
-        return studentName;
+    public int getStudentId() {
+        return studentId;
        }
     }
