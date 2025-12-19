@@ -10,9 +10,15 @@ public class Student extends User {
     private int courses;
     private int enroll;
     private String fac;
-    private double gpa;
     private int hours;
 
+    public Student(int StudentId, String password) {
+        super(password);
+        this.StudentId = StudentId;
+    }
+
+    
+    
     public Student() {
        
     }
@@ -96,45 +102,19 @@ public class Student extends User {
     public int getHours() {
         return hours;
     }
-    
-    
-    public void CalculateMygpa(int courses,  int hours )
-    {
-        double totalPoints = 0;
-        int totalHours = 0;
-        for (int i = 1; i <=courses; i++) {
-            System.out.println("Course " + i + ":");
-            System.out.print("Enter Credit Hours: ");
-            hours = s.nextInt();
-            System.out.print("Enter Grade Point : ");
-            score = s.nextDouble();
-            totalPoints += score * hours;
-            totalHours += hours;
-        }
-        double GPA = ((totalPoints / totalHours/100.0)*4.0);
-         this.gpa=GPA ;
-         
-        System.out.println("Your GPA : " + GPA);
-    }
-    public void setGpa(double GPA) {
-        this.gpa = GPA;
-    }
-    public double getGpa() {
-        return gpa;
-    }
     public String ViewAttendance(){
         return "View Atendance For Steudent : " + StudentId;
     }
     
     @Override
-    public void Login(String password,String name){
+    public void Login(int StudentId ,String password){
         this.password=password;
-        this.name=name;
+        this.StudentId=StudentId;
         System.out.println("Enter Your Password");
         password = s.next();
         System.out.println("Enter Your name");
         name = s.next();
-        if(password.equals(password) && name.equals(name)){
+        if(password.equals(password) && name.equals(StudentId)){
             System.out.println("You Successfully Login");
         }
         else{
